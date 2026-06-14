@@ -1,0 +1,37 @@
+# Node (API & Frontend)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Python (AI Worker)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js (Frontend)
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# NestJS (API)
+api/dist/
+
+# Blockchain (Hardhat/Solidity)
+blockchain/artifacts/
+blockchain/cache/
+blockchain/typechain/
+blockchain/typechain-types/
+
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
