@@ -1,7 +1,14 @@
-# Node (API & Frontend)
+# =========================
+# 1. Dependencies
+# =========================
 node_modules/
-npm-debug.log*
-yarn-error.log*
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
 # Python (AI Worker)
 __pycache__/
@@ -10,28 +17,71 @@ __pycache__/
 venv/
 env/
 
+# =========================
+# 2. Environment Variables (CRITICAL)
+# =========================
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+*.pem
 
+# =========================
+# 3. Build & Compilation Files
+# =========================
 # Next.js (Frontend)
-frontend/.next/
-frontend/out/
-frontend/build/
+.next/
+out/
+build/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
 
 # NestJS (API)
-api/dist/
+dist/
 
 # Blockchain (Hardhat/Solidity)
-blockchain/artifacts/
-blockchain/cache/
-blockchain/typechain/
-blockchain/typechain-types/
+artifacts/
+cache/
+typechain/
+typechain-types/
 
+# =========================
+# 4. Logs & Runtime Data
+# =========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+logs/
+pids/
+*.pid
+*.seed
+*.pid.lock
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+.temp/
+.tmp/
+
+# =========================
+# 5. Testing
+# =========================
+coverage/
+.nyc_output/
+
+# =========================
+# 6. OS & Editor Configurations
+# =========================
 .DS_Store
 Thumbs.db
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 .idea/
-*.log
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
