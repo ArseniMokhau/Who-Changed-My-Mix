@@ -7,11 +7,36 @@ export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [response, setResponse] = useState<any>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [isPolling, setIsPolling] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setFile(e.target.files[0]);
     }
+  };
+
+  const pollStatus = async (id: string) => {
+    setIsPolling(true);
+
+    const check = async () => {
+      try{
+        const res = await fetch(`http://localhost:3000/audio/status/${id}`);
+        const data = await res.json()
+
+        setResponse(data);
+
+        if (data.status === 'completed') {
+          setIsPolling(false);
+        } else {
+          setTimeout(check, 2000);
+        }
+      }
+      catch (error) {
+        console.error('Polling failed:', error);
+        setIsPolling(false);
+      }
+    };
+    check();
   };
 
   const handleUpload = async (e: React.FormEvent) => {
@@ -31,6 +56,12 @@ export default function Home() {
       
       const data = await res.json();
       setResponse(data);
+
+      if (data.trackingId){
+        console.log(data.trackingId)
+        pollStatus(data.trackingId)
+      }
+
     } catch (error) {
       console.error('Upload failed:', error);
       setResponse({ error: 'Failed to connect to the API' });
@@ -52,20 +83,24 @@ export default function Home() {
             accept="audio/*"
             onChange={handleFileChange}
             className={styles.fileInput}
+            disabled={isUploading || isPolling}
           />
           
           <button
             type="submit"
-            disabled={!file || isUploading}
+            disabled={!file || isUploading || isPolling}
             className={styles.submitBtn}
           >
-            {isUploading ? 'Sending to Queue...' : 'Verify Audio'}
+            {/* 4. Dynamic button text based on what phase we are in */}
+            {isUploading ? 'Uploading to Server...' : 
+             isPolling ? 'AI is Analyzing...' : 
+             'Verify Audio'}
           </button>
         </form>
 
         {response && (
           <div className={styles.responseBox}>
-            <h3 className={styles.responseTitle}>API Response:</h3>
+            <h3 className={styles.responseTitle}>System Status:</h3>
             <pre className={styles.responsePre}>
               {JSON.stringify(response, null, 2)}
             </pre>

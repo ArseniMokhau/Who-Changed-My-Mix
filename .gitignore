@@ -85,3 +85,35 @@ Thumbs.db
 *.launch
 .settings/
 *.sublime-workspace
+
+# =========================
+# Python (AI Worker) & Machine Learning
+# =========================
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# =========================
+# PyTorch Model Weights
+# =========================
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# =========================
+# Training Data & Audio Sets
+# =========================
+data/
+datasets/
+*.wav
+*.mp3
+*.flac
+*.spectrogram
+
+# =========================
+# Jupyter Notebooks
+# =========================
+.ipynb_checkpoints/

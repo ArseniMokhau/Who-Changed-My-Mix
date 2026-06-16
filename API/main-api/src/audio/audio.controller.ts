@@ -1,4 +1,4 @@
-import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, Body, UploadedFile, UseInterceptors, Get, Param } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AudioService } from './audio.service';
 
@@ -17,5 +17,16 @@ export class AudioController {
       trackingId: metadata.id,
       status: metadata.status,
     };
+  }
+
+  @Post('webhook/ai-result')
+  async handleAiWebhook(@Body() body: { metadataId: string; score: number; isManipulated: boolean }) {
+    await this.audioService.saveAiResult(body.metadataId, body.score, body.isManipulated);
+    return { success: true };
+  }
+
+  @Get('status/:id')
+  async checkStatus(@Param('id') id: string) {
+    return this.audioService.getAudioStastus(id);
   }
 }

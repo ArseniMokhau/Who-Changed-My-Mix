@@ -19,4 +19,10 @@ export class AudioMetadata {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column({ type: 'float', nullable: true })
+  manipulationScore: number;
+
+  @Column({ type: 'boolean', nullable: true })
+  isManipulated: boolean;
 }
