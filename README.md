@@ -43,6 +43,7 @@ Results are combined and sent back to the Next.js frontend via an automated poll
 ├── main-api/          # NestJS central hub (HTTP handling, Database, Webhooks)
 ├── ai-worker/         # Python/FastAPI service for PyTorch audio analysis
 └── contracts/         # Hardhat environment for Solidity smart contracts
+```
 
 🚀 Local Development Setup
 Because this project spans multiple environments, you will need several dependencies installed globally on your machine before running the system.
